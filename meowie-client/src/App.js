@@ -8,8 +8,8 @@ import AuthContext, { AuthProvider } from "./context/AuthContext";
 function App() {
   return (
     <div>
-      <Navbar/> 
       <AuthProvider>
+      <Navbar/> 
         <Routes>
           <Route path="/" element={<Home/>}/> 
           <Route path="/login" element={<Login/>}/>

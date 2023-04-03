@@ -1,15 +1,19 @@
 import axios from "axios";
 import { createContext, useEffect, useState } from "react";
 import jwt_decode from "jwt-decode"; 
+import {useNavigate} from 'react-router-dom';
+
 const AuthContext = createContext()
 
 export default AuthContext;
 
 export const AuthProvider = ({children}) =>{
-    
-    let [authTokens, setAuthTokens] = useState(null)
-    let [user, setUser] = useState(null)
+    const navigate = useNavigate()
+    const localToken = JSON.parse(localStorage.getItem('authTokens'))
 
+    let [authTokens, setAuthTokens] = useState(()=> localToken ? localToken : null)
+    let [user, setUser] = useState(()=>localToken ? jwt_decode(localToken['accessToken'])['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name'] : null)
+    
     let loginUser = async (e) =>{
         e.preventDefault();
         let request = fetch('https://localhost:7208/api/Auth/Login',{
@@ -23,17 +27,10 @@ export const AuthProvider = ({children}) =>{
         if(response.status === 200){
             let result = await response.json()
             setAuthTokens(result.token)
-            setUser(jwt_decode(result.token.accessToken))
-            console.log(user)
+            setUser((jwt_decode(result.token.accessToken))["http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name"])
+            localStorage.setItem("authTokens",JSON.stringify(result.token))
+            navigate('/')
         }
-    }
-
-    let loginUser2 = async (e) =>{
-        e.preventDefault()
-        axios.post('https://localhost:7208/api/Auth/Login',{
-            'usernameOrEmail' : e.target.usernameOrEmail.value,
-            'password' : e.target.password.value
-        }).then(response => console.log("axios res : ",response))
     }
 
     let contextData ={

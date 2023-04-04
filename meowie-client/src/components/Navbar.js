@@ -4,7 +4,7 @@ import AuthContext from '../context/AuthContext';
 
 const Navbar = () => {
 
-  let {user} = useContext(AuthContext);
+  let {user, logoutUser} = useContext(AuthContext);
 
   return (
     <div className='flex items-center justify-between p-4 z-[100] w-full absolute'>
@@ -13,7 +13,7 @@ const Navbar = () => {
       </Link>
       <div>
         {user ? (
-        <button className=' pr-4 px-6 py-4 rounded cursor-pointer text-white'>LOGOUT</button>
+        <button onClick={logoutUser} className=' pr-4 px-6 py-4 rounded cursor-pointer text-white'>LOGOUT</button>
         ) : 
         (<Link to="/login">
         <button className=' pr-4 px-6 py-4 rounded cursor-pointer text-white'>LOGIN</button>

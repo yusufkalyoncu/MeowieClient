@@ -1,8 +1,38 @@
 import React from 'react'
 import {Link} from 'react-router-dom'
-import RegisterForm from '../components/form/RegisterForm'
+import {useForm} from 'react-hook-form';
+import {MuiButton} from '../components/materialui/MuiButton'
+import {zodResolver} from '@hookform/resolvers/zod';
+import {z} from 'zod';
+import 'react-toastify/dist/ReactToastify.css';
+
+const schema = z.object({
+  name: z.string().min(3).nonempty("Name is required"),
+  username: z.string().min(6).nonempty("Username is required"),
+  email: z.string().email().nonempty("Email is required"),
+  password: z.string().min(6).max(20).nonempty("Password is required"),
+  confirmPassword: z.string().min(6).max(20).nonempty("Password is required"),
+}).superRefine(({ confirmPassword, password }, ctx) => {
+  if (confirmPassword !== password) {
+    ctx.addIssue({
+      code: 'custom',
+      message: 'The passwords did not match',
+      path: ["confirmPassword"]
+    });
+  }
+});
+
+
 
 const Register = () => {
+  const myError = new z.ZodError([]);
+  const {register,handleSubmit, formState} = useForm({resolver:zodResolver(schema)})
+  const {errors} = formState
+
+  const handleSave = (formValues) => {
+
+  }
+
   return (
     <>
       <div className='w-full h-screen'>
@@ -12,10 +42,18 @@ const Register = () => {
           <div className='max-w-[450px]  mx-auto bg-black/80 text-white rounded'>
             <div className='max-w-[320px] mx-auto py-16'>
               <h1 className='text-3xl font-bold'>REGISTER</h1>
-              <RegisterForm></RegisterForm> 
-              <form className='w-full flex flex-col py-4'>
-
-                                 
+              <form onSubmit={handleSubmit(handleSave)} className='w-full flex flex-col py-4'>
+                <input {...register('name')} className='p-3 my-2 bg-gray-700 rounded' type="text" placeholder='Full Name' autoComplete='off'/>
+                <small>{errors.name?.message}</small>
+                <input {...register('username')} className='p-3 my-2 bg-gray-700 rounded' type="text" placeholder='Username' name='username' autoComplete='off'/>
+                <small>{errors.username?.message}</small>
+                <input {...register('email')} className='p-3 my-2 bg-gray-700 rounded' type="email" placeholder='Email' name='email' autoComplete='email'/>
+                <small>{errors.email?.message}</small>
+                <input {...register('password')} className='p-3 my-2 bg-gray-700 rounded' type="password" placeholder='Password' name='password' autoComplete='off'/>
+                <small>{errors.password?.message}</small>
+                <input {...register('confirmPassword')} className='p-3 my-2 bg-gray-700 rounded' type="password" placeholder='Confirm Password' name='confirmPassword' autoComplete='off'/>
+                <small>{errors.confirmPassword?.message}</small>
+                <MuiButton type='submit'>Register</MuiButton>         
                 <p className='py-4'>
                   <span className="text-gray-600 pr-2">Already registered to Meowie?</span>
                   <Link to="/login">

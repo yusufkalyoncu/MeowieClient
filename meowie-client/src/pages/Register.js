@@ -1,10 +1,10 @@
-import React from 'react'
+import React, { useContext, useState } from 'react'
 import {Link} from 'react-router-dom'
 import {useForm} from 'react-hook-form';
 import {MuiButton} from '../components/materialui/MuiButton'
 import {zodResolver} from '@hookform/resolvers/zod';
 import {z} from 'zod';
-import 'react-toastify/dist/ReactToastify.css';
+import UserContext from '../context/UserContext';
 
 const schema = z.object({
   name: z.string().min(3).nonempty("Name is required"),
@@ -23,14 +23,19 @@ const schema = z.object({
 });
 
 
-
 const Register = () => {
-  const myError = new z.ZodError([]);
   const {register,handleSubmit, formState} = useForm({resolver:zodResolver(schema)})
   const {errors} = formState
+  const [err,setErr] = useState(null)
+  const {registerUser} = useContext(UserContext)
 
-  const handleSave = (formValues) => {
-
+  const handleSave = async (formValues) => {
+    setErr(null)
+    registerUser(formValues).then((res)=>{
+      if(res){
+        setErr(res.message)
+      }
+    })
   }
 
   return (
@@ -53,7 +58,8 @@ const Register = () => {
                 <small>{errors.password?.message}</small>
                 <input {...register('confirmPassword')} className='p-3 my-2 bg-gray-700 rounded' type="password" placeholder='Confirm Password' name='confirmPassword' autoComplete='off'/>
                 <small>{errors.confirmPassword?.message}</small>
-                <MuiButton type='submit'>Register</MuiButton>         
+                <MuiButton type='submit'>Register</MuiButton>
+                <small>{err ? err : ""}</small>    
                 <p className='py-4'>
                   <span className="text-gray-600 pr-2">Already registered to Meowie?</span>
                   <Link to="/login">

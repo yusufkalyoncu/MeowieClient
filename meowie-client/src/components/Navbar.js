@@ -1,4 +1,4 @@
-import React, { useContext } from 'react'
+import React, { useContext,useEffect } from 'react'
 import {Link} from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 import catIcon from '../images/cat.png'
@@ -7,6 +7,16 @@ const Navbar = () => {
 
   let {user, logoutUser} = useContext(AuthContext);
 
+
+  useEffect(()=>{
+    const localStorageData = JSON.parse(localStorage.getItem('authTokens'))
+    if(localStorageData){
+      const expirationDate = Date.parse(localStorageData.expiration)
+      if(Date.now() > expirationDate){
+        logoutUser()
+      }
+    }
+  })
   return (
     <div className='flex items-center justify-center p-4 z-[100] w-full absolute hover:bg-black/10'>
       <Link to="/">

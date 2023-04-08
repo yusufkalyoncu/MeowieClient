@@ -18,7 +18,7 @@ const Navbar = () => {
     }
   })
   return (
-    <div className='flex items-center justify-center p-4 z-[100] w-full absolute hover:bg-black/10'>
+    <div className=' flex items-center justify-center p-4 z-[100] w-full absolute hover:bg-black/25'>
       <Link to="/">
       <img src={catIcon} alt='catLogo' width={40} className='cursor-pointer'/>
       </Link>

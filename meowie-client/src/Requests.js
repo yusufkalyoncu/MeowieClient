@@ -1,7 +1,7 @@
 let baseURL = `https://localhost:7208/api/`
 
 let requests = {
-    getRandomMovies : `${baseURL}Movies/random?Count=1`,
+    getRandomMovies : (count)=>`${baseURL}Movies/random?Count=${count}`,
     getActionMovies : `${baseURL}Movies/genre?Genres=Action&Count=20`,
     getComedyMovies : `${baseURL}Movies/genre?Genres=Comedy&Count=20`,
     getDramaMovies : `${baseURL}Movies/genre?Genres=Drama&Count=20`,

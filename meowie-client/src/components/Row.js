@@ -1,9 +1,8 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import RowMovie from './RowMovie'
-import {MdChevronLeft, MdChevronRight} from 'react-icons/md'
 
-const Row = ({title, fetchURL, rowId}) => {
+const Row = ({title, fetchURL, rowId, count}) => {
   const[movies, setMovies] = useState([])
 
   useEffect(()=>{
@@ -13,35 +12,24 @@ const Row = ({title, fetchURL, rowId}) => {
 
   },[fetchURL])
 
-const slideLeft = () =>{
-  var slider = document.getElementById("slider"+rowId);
-  slider.scrollLeft = slider.scrollLeft - 500;
-}
-const slideRight = () =>{
-  var slider = document.getElementById("slider"+rowId);
-  slider.scrollLeft = slider.scrollLeft + 500;
-}
-
   return (
     <>
-      <h2 className='text-white font-bold md:text-xl p4'>{title}</h2>
-      <div className='relative flex items-center group'>
-        <MdChevronLeft
-         className='bg-white left-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' 
-         size={40}
-         onClick={slideLeft}
-         />
-        <div id={'slider'+rowId} className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
-          {movies.map((item, id)=>(
-            <RowMovie key={id} item={item}/>
-          ))}
+    <div className='w-full h-auto justify-center text-center'>
+        <h2 className='text-white font-bold md:text-xl p4 '>{title}</h2>
+        <div className='relative flex items-center group'>
+          <div id={'slider'+rowId} className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
+            {
+              movies.length > 0
+              ?
+              movies.map((item, id)=>(<RowMovie key={id} item={item}/>))
+              :
+              Array.from({ length: count }, (_, index) => (
+                <RowMovie key={index} item={null} />
+              ))
+            }
+          </div>
         </div>
-        <MdChevronRight 
-        className='bg-white right-0 rounded-full absolute opacity-50 hover:opacity-100 cursor-pointer z-10 hidden group-hover:block' 
-        size={40}
-        onClick={slideRight}
-        />
-      </div>
+    </div>
     </>
   )
 }

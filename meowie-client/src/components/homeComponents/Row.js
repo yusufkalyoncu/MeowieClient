@@ -14,8 +14,8 @@ const Row = ({title, fetchURL, rowId, count}) => {
 
   return (
     <>
-    <div className='w-full h-auto justify-center text-center'>
-        <h2 className='text-white font-bold md:text-xl p4 '>{title}</h2>
+    <div className='w-full h-auto justify-center text-center pt-6 pb-4'>
+        <h2 className='text-white font-bold md:text-xl pb-3'>{title}</h2>
         <div className='relative flex items-center group'>
           <div id={'slider'+rowId} className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
             {

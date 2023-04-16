@@ -3,14 +3,18 @@ let baseURL = `https://localhost:7208/api/`
 const UrlService = {
     movie : {
         RandomMoviesURL : (count) =>`${baseURL}Movies/random?Count=${count}`,
-        GenreMoviesURL : (count, ...genres) => {
+        MoviesURL : (count, page=0, shuffle=false, ...genres) => {
             let genresUrl = ""
-            genres.map((genre)=>genresUrl+=`Genres=${genre}&`)
-            genresUrl += `Count=${count}`
-            return `${baseURL}Movies/genre?${genresUrl}`
-        }
+            if(genres) {
+            genres.map((genre)=>genresUrl+=`&Genres=${genre}`)
+            }
+            console.log(`${baseURL}Movies?Page=${page}&Count=${count}${genresUrl}&Shuffle=${shuffle}`)
+            return `${baseURL}Movies?Page=${page}&Count=${count}${genresUrl}`
+        },
+        MovieById : (movieId) => `${baseURL}Movies/${movieId}`
     }
 }
+
 
 export const Genres = {
     Action : 'Action',

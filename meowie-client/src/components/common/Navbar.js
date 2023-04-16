@@ -1,7 +1,7 @@
 import React, { useContext,useEffect } from 'react'
 import {Link} from 'react-router-dom';
-import AuthContext from '../context/AuthContext';
-import catIcon from '../images/cat.png'
+import AuthContext from '../../context/AuthContext';
+import catIcon from '../../images/cat.png'
 
 const Navbar = () => {
 
@@ -43,9 +43,14 @@ const Navbar = () => {
         </Link>)
         }
         
-        <Link to="/register">
+        {user ? (
+        <button className='px-2 cursor-pointer font-bold text-[#d2d2d7] hover:text-white' onClick={logoutUser} >PROFILE</button>
+        ) : 
+        (<Link to="/register">
         <button className='px-2 cursor-pointer font-bold text-[#d2d2d7] hover:text-white'>REGISTER</button>
-        </Link>
+        </Link>)
+        }
+        
       </div>
     </div>
   )

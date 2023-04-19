@@ -1,8 +1,11 @@
 import React from 'react'
 import loadingSvg from '../../images/loading.svg'
+import { useNavigate } from 'react-router-dom'
 const RowMovie = ({item}) => {
+  const navigate = useNavigate()
   return (
-    <div className='w-[108px] h-[160px] sm:w-[135px] sm:h-[200px] md:w-[160px] md:h-[240px] lg:w-[190px] lg:h-[280px] inline-block cursor-pointer relative p-2'>
+    <div onClick={()=>navigate(`/detail/${item.id}`,{replace: false})} 
+    className='w-[108px] h-[160px] sm:w-[135px] sm:h-[200px] md:w-[160px] md:h-[240px] lg:w-[190px] lg:h-[280px] inline-block cursor-pointer relative p-2'>
         
             { item ? 
             <img className='w-full h-full object-cover block' 

@@ -3,6 +3,7 @@ import ListMovieItem from './ListMovieItem'
 import axios from 'axios'
 import { Pagination } from '@mui/material'
 import UrlService from '../../UrlService'
+import ListMovieItemSkeleton from '../skeletons/ListMovieItemSkeleton'
 
 const ListMovie = ({fetchURL, count}) => {
     const [movies, setMovies] = useState([])
@@ -32,8 +33,8 @@ const ListMovie = ({fetchURL, count}) => {
                 movies.map((item, id)=>(<ListMovieItem key={id} item={item}/>))
                 :
                 Array.from({ length: count }, (_, index) => (
-                    <ListMovieItem key={index} item={null} />
-                ))
+                  <ListMovieItemSkeleton key={index}/>
+              ))
             }           
             </div>
         </div>

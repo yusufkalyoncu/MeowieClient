@@ -1,9 +1,12 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import loadingSvg from '../../images/loading.svg'
+import { useNavigate } from "react-router-dom";
 
 const ListMovieItem = ({item}) => {
+  const navigate = useNavigate()
     return (
-        <div className=' md:w-[324px] md:h-[480px] sm:w-[421px] sm:h-[624px] inline-block cursor-pointer relative'>
+        <div onClick={()=>navigate(`/detail/${item.id}`)} 
+        className=' md:w-[324px] md:h-[480px] sm:w-[421px] sm:h-[624px] inline-block cursor-pointer relative'>
             
                 { item ? 
                 <img className='w-full h-full object-cover block' 

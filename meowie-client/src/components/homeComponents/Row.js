@@ -1,6 +1,9 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import RowMovie from './RowMovie'
+import RowMovieSkeleton from '../skeletons/RowMovieSkeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton'
 
 const Row = ({title, fetchURL, rowId, count}) => {
   const[movies, setMovies] = useState([])
@@ -24,8 +27,8 @@ const Row = ({title, fetchURL, rowId, count}) => {
               movies.map((item, id)=>(<RowMovie key={id} item={item}/>))
               :
               Array.from({ length: count }, (_, index) => (
-                <RowMovie key={index} item={null} />
-              ))
+                <RowMovieSkeleton key={index}/>
+            ))
             }
           </div>
         </div>

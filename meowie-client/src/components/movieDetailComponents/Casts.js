@@ -17,7 +17,6 @@ const Casts = (props) => {
       imageURL={props.director?.imageURL}
       name={props.director?.name}
       /> 
-      <p className='font-semibold'>{props.director ? props.director.name : ""}</p>
       </div>
       :
         <CardSkeleton/>
@@ -25,17 +24,18 @@ const Casts = (props) => {
     <h2 className='text-xl font-bold pt-6'>
       CASTS
     </h2>
-    <div className=" flex scrollbar-thin scrollbar-thumb-[#c23442] scrollbar-track-[#d2d2d7] overflow-x-scroll hover:scrollbar-thumb-[#ff6473]">
+    <div className=" flex scrollbar-thin scrollbar-thumb-[#c23442] scrollbar-track-[#d2d2d7] overflow-x-scroll hover:scrollbar-thumb-[#ff6473] overflow-y-hidden pb-2">
         {
         props.actors ?
-        props.actors.map((actor)=>{
+        props.actors.map((actor,i)=>{
             return (
-                <div>
+                <div key={i}>
                   <Card 
+                  key={i}
                   onClick={""}
                   imageURL={actor ? actor.imageURL : loadingSvg}
+                  name={actor ? actor.name : "notfound"}
                   />
-                  <p className='font-semibold'>{actor ? actor.name : ""}</p>
                 </div>
             )
         }) : Array.from({ length: props.count }, (_, index) => (

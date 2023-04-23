@@ -1,11 +1,12 @@
 import React from 'react'
 import loadingSvg from '../../images/loading.svg'
 import { themeColors } from '../../constants'
+import { getImageUrl } from '../../utils/ImageUrl'
 
 const DetailBody = ({movie}) => {
   return (
     <div className='-mt-[400px] flex flex-col md:flex-row items-center relative z-10 mobile:block pl-0 md:pl-24'>
-        <img src={movie ? movie.imageURL : loadingSvg} 
+        <img src={movie ? getImageUrl.originalSize(movie.imageURL) : loadingSvg} 
         className='w-[400px] min-w-[400px] h-[600px]'/>
         <div className='px-6 flex flex-col items-center md:items-start gap-3'>
             <p className='text-3xl md:text-5xl bold pt-4 md:pt-16'>{movie ? movie?.name : "Loading..."}</p>

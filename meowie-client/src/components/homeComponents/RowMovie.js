@@ -1,6 +1,7 @@
 import React from 'react'
 import loadingSvg from '../../images/loading.svg'
 import { useNavigate } from 'react-router-dom'
+import { getImageUrl } from '../../utils/ImageUrl'
 const RowMovie = ({item}) => {
   const navigate = useNavigate()
   return (
@@ -9,7 +10,7 @@ const RowMovie = ({item}) => {
         
             { item ? 
             <img className='w-full h-full object-cover block' 
-              src={item?.imageURL} alt={item?.title}>
+              src={getImageUrl.originalSize(item?.imageURL)} alt={item?.title}>
             </img>
             :
             <img className='w-full h-full object-cover block' 

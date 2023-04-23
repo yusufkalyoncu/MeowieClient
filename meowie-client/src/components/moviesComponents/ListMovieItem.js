@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react'
 import loadingSvg from '../../images/loading.svg'
 import { useNavigate } from "react-router-dom";
+import { getImageUrl } from '../../utils/ImageUrl';
 
 const ListMovieItem = ({item}) => {
   const navigate = useNavigate()
@@ -10,7 +11,7 @@ const ListMovieItem = ({item}) => {
             
                 { item ? 
                 <img className='w-full h-full object-cover block' 
-                  src={item?.imageURL} alt={item?.title}>
+                  src={getImageUrl.originalSize(item?.imageURL)} alt={item?.title}>
                 </img>
                 :
                 <img className='w-full h-full object-cover block' 

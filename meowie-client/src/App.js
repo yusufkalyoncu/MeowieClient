@@ -11,6 +11,7 @@ import MovieDetail from "./pages/MovieDetail";
 import { MovieProvider } from "./context/MovieContext";
 import { SkeletonTheme } from "react-loading-skeleton";
 import ScrollToTop from "./utils/ScrollToTop"
+import 'font-awesome/css/font-awesome.min.css';
 function App() {
   return (
     <div>

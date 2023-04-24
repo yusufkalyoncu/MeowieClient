@@ -1,5 +1,4 @@
 import React, { useContext, useEffect, useState } from 'react'
-import axios from 'axios'
 import { MuiButton } from '../materialui/MuiButton'
 import MovieContext from '../../context/MovieContext'
 import { getImageUrl } from '../../utils/ImageUrl'
@@ -14,7 +13,7 @@ const Main = () => {
     getRandomMovies(1).then((movies) =>{
       setMovie(movies[0])
     })
-  }, []);
+  },[]);
 
 const truncateString = (str, num) => {
   if(str?.length > num){

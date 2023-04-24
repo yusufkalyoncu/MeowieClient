@@ -38,7 +38,7 @@ export const UserProvider = ({children}) => {
     }
 
     let contextData = {
-        registerUser:registerUser
+        registerUser:registerUser,
     }
     
     return(

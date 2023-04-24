@@ -2,7 +2,6 @@ import React from 'react'
 import Card from './Card'
 import loadingSvg from '../../images/loading.svg'
 import CardSkeleton from '../skeletons/CardSkeleton'
-import Skeleton from 'react-loading-skeleton'
 
 const Casts = (props) => {
   return (

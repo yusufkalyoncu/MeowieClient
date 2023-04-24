@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react'
+import React from 'react'
 import loadingSvg from '../../images/loading.svg'
 import { useNavigate } from "react-router-dom";
 import { getImageUrl } from '../../utils/ImageUrl';

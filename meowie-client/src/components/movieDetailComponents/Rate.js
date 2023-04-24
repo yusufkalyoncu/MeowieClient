@@ -1,22 +1,22 @@
-import React, { useMemo, useState } from 'react'
+import React, { useContext, useMemo, useState } from 'react'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPaw} from '@fortawesome/fontawesome-free-solid'
 import {PropTypes} from 'prop-types'
-const Rate = ({count, rating, color, onRating}) => {
+const Rate = ({rating, color, onRating}) => {
 
   const [hoverRating, setHoverRating] = useState(0)
 
-  const getColor = index =>{
-    if(hoverRating >= index){
-      return color.filled
-    }
-    else if(!hoverRating && rating >= index){
-      return color.filled
-    }
-    return color.unfilled
-  }
-
   const pawRating = useMemo(()=>{
+    const getColor = index =>{
+      if(hoverRating >= index){
+        return color.filled
+      }
+      else if(!hoverRating && rating >= index){
+        return color.filled
+      }
+      return color.unfilled
+    }
+  
     return Array.from({ length: 10 }).map((_, index) => (
       <FontAwesomeIcon
         icon={faPaw}
@@ -28,7 +28,8 @@ const Rate = ({count, rating, color, onRating}) => {
         onMouseLeave={()=> setHoverRating(0)}
       />
     ))
-  },[count, rating, hoverRating])
+  },[color.filled, color.unfilled, hoverRating, onRating, rating])
+  
   return (
     <div>
       {

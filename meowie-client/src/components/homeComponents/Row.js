@@ -2,8 +2,6 @@ import axios from 'axios'
 import React, { useEffect, useState } from 'react'
 import RowMovie from './RowMovie'
 import RowMovieSkeleton from '../skeletons/RowMovieSkeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
-import Skeleton from 'react-loading-skeleton'
 
 const Row = ({title, fetchURL, rowId, count}) => {
   const[movies, setMovies] = useState([])

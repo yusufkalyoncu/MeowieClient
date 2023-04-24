@@ -13,8 +13,7 @@ const CommentList = (props) => {
   };
 
   const rate = (rating, content) =>{
-    console.log(props.id)
-    rateMovie(content, rating, props.id) 
+    rateMovie(content, rating, props.movie.id) 
   }
   return (
     <div className='flex justify-center pt-16 flex-col items-center'>

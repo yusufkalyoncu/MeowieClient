@@ -9,7 +9,7 @@ const Home = () => {
       <Main/>
       <JoinUs/>
       <Row rowId={1} title='Top rated 5 movie' fetchURL={UrlService.movie.MoviesURL(5,0,true)} count={5}/>
-      <Row rowId={1} title='Popular Now' fetchURL={UrlService.movie.RandomMoviesURL(5)} count={5}/>
+      <Row rowId={2} title='Popular Now' fetchURL={UrlService.movie.RandomMoviesURL(5)} count={5}/>
     </div>
   )
 }

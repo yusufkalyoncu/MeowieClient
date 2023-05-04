@@ -22,7 +22,7 @@ const MovieDetail = () => {
         <Banner bannerUrl={movie ? movie?.bannerURL : null}/>
         <DetailBody movie={movie ? movie : null}/>
         <Casts actors={movie ? movie.actors : null} director={movie ? movie.director : null} count={20}/>
-        <CommentList movie={movie ? movie : null}/>
+        <CommentList movie={movie ? movie : null} comments={movie ? movie.comments : null}/>
     </div>
   )
 }

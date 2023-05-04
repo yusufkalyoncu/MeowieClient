@@ -3,7 +3,7 @@ let baseURL = `https://localhost:7208/api/`
 const UrlService = {
     movie : {
         RandomMoviesURL : (count) =>`${baseURL}Movies/random?Count=${count}`,
-        MoviesURL : (count, page=0, shuffle=false, ...genres) => {
+            MoviesURL : (count, page=0, shuffle=false, ...genres) => {
             let genresUrl = ""
             if(genres) {
             genres.map((genre)=>genresUrl+=`&Genres=${genre}`)

@@ -40,7 +40,7 @@ export const MovieProvider = ({children}) => {
             if(localToken){
                 var token = localToken['accessToken']
                 var user = jwt_decode(localToken['accessToken'])['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
-                let request = fetch('https://localhost:7208/api/Movies/comment',{
+                let request = fetch('https://localhost:7208/api/Movies/rate',{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
@@ -57,7 +57,7 @@ export const MovieProvider = ({children}) => {
                 let response = await request
                 if(response.ok){
                     let result = await response.json()
-                    toaster.success(result)
+                    toaster.success(result.message)
                 }
                 else{
                     toaster.error(response.status)

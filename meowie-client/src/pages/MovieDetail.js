@@ -16,7 +16,7 @@ const MovieDetail = () => {
             setMovie(response.data.movie)
             console.log(response.data.movie)
         })
-    },[])
+    },[movie?.comments]) // i will fix this issue
   return (
     <div>
         <Banner bannerUrl={movie ? movie?.bannerURL : null}/>

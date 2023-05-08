@@ -1,6 +1,9 @@
 import React from 'react'
 import loadingSvg from '../../images/loading.svg'
 import { getImageUrl } from '../../utils/ImageUrl'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import {faPaw} from '@fortawesome/fontawesome-free-solid'
+import imdbSvg from '../../images/imdb.svg'
 
 const DetailBody = ({movie}) => {
   return (
@@ -18,6 +21,17 @@ const DetailBody = ({movie}) => {
                     )
                 }): ""}
             </ul>
+            <div className='flex pt-2'>
+                <div className='flex'>
+                    <img className='w-[35px]' src={imdbSvg} alt='imdb rating'/>
+                    <p className='text-2xl text-center pl-1'>{movie ? movie.imdbRating : "0.0"}</p>
+                </div>
+                <div className='flex pl-8'>
+                    <FontAwesomeIcon icon={faPaw} size='2xl' style={{color: "#ff6473"}}/>
+                    <p className='text-2xl text-center pl-1'>{movie ? movie.userRating : "0.0"}</p>
+                </div>
+
+            </div>
             <p className='opacity-80 text-xl pt-2 pr-2 md:pr-96'>{movie?.description}</p>
         </div>
     </div>

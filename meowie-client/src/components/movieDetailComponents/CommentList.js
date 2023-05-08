@@ -7,21 +7,34 @@ const CommentList = ({comments,movie}) => {
   const [rating, setRating] = useState(0)
   const {rateMovie} = useContext(MovieContext)
   const [textAreaContent, setTextAreaContent] = useState('');
+  const [allComments, setAllComments] = useState([]);
 
   const handleTextAreaChange = (event) => {
     setTextAreaContent(event.target.value);
   };
 
+  useEffect(()=>{
+    setAllComments(comments)
+    console.log("its work")
+    },[comments]);
 
-  const rate = (rating, content) =>{
-    rateMovie(content, rating, movie.id) 
-  }
+
+    const rate = (rating, content) =>{
+      rateMovie(content, rating, movie.id)
+      .then(newComment => {
+        console.log(newComment)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+    }
+
   return (
     <div className='flex justify-center pt-16 flex-col items-center'>
         <hr className='w-[80%] pb-16'/>
-        {comments?.length > 0 ? 
-        comments.map((comment, index) => (
-          <CommentCard comment={comment}/>
+        {allComments?.length > 0 ? 
+        allComments.map((comment, index) => (
+          <CommentCard comment={comment} key={index}/>
         )) : 
         <p className='text-3xl font-bold text-center'>No comments, be the first to comment</p>
       }

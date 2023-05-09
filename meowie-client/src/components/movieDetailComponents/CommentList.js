@@ -3,10 +3,16 @@ import Rate from './Rate'
 import {MuiButton} from '../materialui/MuiButton'
 import MovieContext from '../../context/MovieContext'
 import CommentCard from './CommentCard'
-const CommentList = ({comments,movie}) => {
+import AuthContext from '../../context/AuthContext'
+import CommentContext from '../../context/CommentContext'
+
+const CommentList = ({comments,movie,onCommentAdded}) => {
   const [rating, setRating] = useState(0)
   const {rateMovie} = useContext(MovieContext)
+  const {user} = useContext(AuthContext)
+  const {getSingleComment} = useContext(CommentContext)
   const [textAreaContent, setTextAreaContent] = useState('');
+  const [userComment, setUserComment] = useState(null);
   const [allComments, setAllComments] = useState([]);
 
   const handleTextAreaChange = (event) => {
@@ -14,19 +20,16 @@ const CommentList = ({comments,movie}) => {
   };
 
   useEffect(()=>{
+    if(user){
+      setUserComment(getSingleComment(user, movie?.id))
+    }
     setAllComments(comments)
-    console.log("its work")
     },[comments]);
 
-
     const rate = (rating, content) =>{
-      rateMovie(content, rating, movie.id)
-      .then(newComment => {
-        console.log(newComment)
+      rateMovie(content, rating, movie.id).then(_ => {
+        onCommentAdded();
       })
-      .catch(error => {
-        console.log(error);
-      });
     }
 
   return (

@@ -28,7 +28,7 @@ const DetailBody = ({movie}) => {
                 </div>
                 <div className='flex pl-8'>
                     <FontAwesomeIcon icon={faPaw} size='2xl' style={{color: "#ff6473"}}/>
-                    <p className='text-2xl text-center pl-1'>{movie ? movie.userRating : "0.0"}</p>
+                    <p className='text-2xl text-center pl-1'>{movie ? movie.userRating.toFixed(1) : "0.0"}</p>
                 </div>
 
             </div>

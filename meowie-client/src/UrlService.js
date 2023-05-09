@@ -12,6 +12,9 @@ const UrlService = {
             return `${baseURL}Movies?Page=${page}&Count=${count}${genresUrl}`
         },
         MovieById : (movieId) => `${baseURL}Movies/${movieId}`
+    },
+    comment : {
+        GetUserCommentByMovieId : (username, movieId) => `${baseURL}Comments/single-comment?Username=${username}&MovieId=${movieId}`
     }
 }
 

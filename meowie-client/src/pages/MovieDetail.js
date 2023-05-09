@@ -10,19 +10,22 @@ import CommentList from '../components/movieDetailComponents/CommentList'
 const MovieDetail = () => {
     const {id} = useParams()
     const [movie, setMovie] = useState(null)
-
+    const getMovie = () =>{
+      axios.get(UrlService.movie.MovieById(id)).then(response => {
+        setMovie(response.data.movie)
+    })
+    }
     useEffect(() => {
-        axios.get(UrlService.movie.MovieById(id)).then(response => {
-            setMovie(response.data.movie)
-            console.log(response.data.movie)
-        })
-    },[movie?.comments]) // i will fix this issue
+        getMovie()
+    },[])
   return (
     <div>
         <Banner bannerUrl={movie ? movie?.bannerURL : null}/>
         <DetailBody movie={movie ? movie : null}/>
         <Casts actors={movie ? movie.actors : null} director={movie ? movie.director : null} count={20}/>
-        <CommentList movie={movie ? movie : null} comments={movie ? movie.comments : null}/>
+        <CommentList movie={movie ? movie : null} comments={movie ? movie.comments : null} onCommentAdded={() => {
+        getMovie()
+        }}/>
     </div>
   )
 }

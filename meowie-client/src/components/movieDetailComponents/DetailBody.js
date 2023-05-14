@@ -4,6 +4,7 @@ import { getImageUrl } from '../../utils/ImageUrl'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {faPaw} from '@fortawesome/fontawesome-free-solid'
 import imdbSvg from '../../images/imdb.svg'
+import AddMovieToListDialog from '../common/AddMovieToListDialog'
 
 const DetailBody = ({movie}) => {
   return (
@@ -30,7 +31,10 @@ const DetailBody = ({movie}) => {
                     <FontAwesomeIcon icon={faPaw} size='2xl' style={{color: "#ff6473"}}/>
                     <p className='text-2xl text-center pl-1'>{movie ? movie.userRating.toFixed(1) : "0.0"}</p>
                 </div>
-
+            </div>
+            <div className='flex'>
+                <p className='text-lg font-bold text-center pt-2'>Add this movie to list</p>
+                <AddMovieToListDialog movieId={movie?.id}/>
             </div>
             <p className='opacity-80 text-xl pt-2 pr-2 md:pr-96'>{movie?.description}</p>
         </div>

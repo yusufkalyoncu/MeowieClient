@@ -20,7 +20,7 @@ export const CommentProvider = ({children}) => {
             let response = await request
             if(response.ok){
                 let result = await response.json()
-                console.log(result)
+                return result.comment
             }
 
         } catch (error) {

@@ -13,29 +13,34 @@ import { CommentProvider } from "./context/CommentContext";
 import { SkeletonTheme } from "react-loading-skeleton";
 import ScrollToTop from "./utils/ScrollToTop"
 import 'font-awesome/css/font-awesome.min.css';
+import Profile from "./pages/Profile";
+import { MovieListProvider } from "./context/MovieListContext";
 function App() {
   return (
     <div>
+      <UserProvider>
       <CommentProvider>
       <MovieProvider>
       <AuthProvider>
-        <UserProvider>
+      <MovieListProvider>
+        
         <SkeletonTheme baseColor="#3f505c" highlightColor="#505f69">
           <Navbar/> 
           <ScrollToTop/>
           <Routes>
-            
             <Route path="/" element={<Home/>}/> 
             <Route path="/movies" element={<Movies/>}/>
             <Route path="/login" element={<Login/>}/>
             <Route path="/register" element={<Register/>}/>
+            <Route path="/profile" element={<Profile/>}/>
             <Route path="/detail/:id" element={<MovieDetail/>}/>
           </Routes>
         </SkeletonTheme>
-        </UserProvider>
+      </MovieListProvider>
       </AuthProvider>
       </MovieProvider>
       </CommentProvider>
+      </UserProvider>
       <ToastContainer />
     </div>
   );

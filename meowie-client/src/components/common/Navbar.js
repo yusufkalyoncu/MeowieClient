@@ -44,7 +44,9 @@ const Navbar = () => {
         }
         
         {user ? (
-        <button className='px-2 cursor-pointer font-bold text-[#d2d2d7] hover:text-white' onClick={logoutUser} >PROFILE</button>
+        <Link to='/profile'>
+        <button className='px-2 cursor-pointer font-bold text-[#d2d2d7] hover:text-white'>PROFILE</button>
+        </Link>
         ) : 
         (<Link to="/register">
         <button className='px-2 cursor-pointer font-bold text-[#d2d2d7] hover:text-white'>REGISTER</button>

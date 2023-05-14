@@ -5,7 +5,7 @@ import {faPaw} from '@fortawesome/fontawesome-free-solid'
 const CommentCard = ({comment}) => {
 
   return (
-    <div className="mx-auto rounded overflow-hidden shadow-lg flex items-center w-[480px] sm:w-[720px] pb-5 m-2">
+    <div className="mx-auto rounded overflow-hidden shadow-xl flex items-center w-[480px] sm:w-[720px] pb-5 m-2">
       <img className="w-12 h-12 rounded-full mr-4" src={`https://localhost:7208/api/Images/username.png`} alt="Profil Resmi" />
       <div className="flex-1">
         <div className='w-full h-full flex justify-between'>

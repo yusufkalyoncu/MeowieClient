@@ -1,7 +1,8 @@
-import { createContext} from "react";
+import { createContext, useContext} from "react";
 import {toaster} from '../components/toastify/toastConstans'
 import UrlService from "../UrlService";
 import jwt_decode from "jwt-decode"; 
+import UserContext from "./UserContext";
 
 const MovieContext = createContext()
 
@@ -9,9 +10,10 @@ export default MovieContext
 
 export const MovieProvider = ({children}) => {
 
+    const {getUsernameAndToken} = useContext(UserContext)
+
     let getRandomMovies = async (count) => {
         try {
-
             let request = fetch(UrlService.movie.RandomMoviesURL(count),{
                 method: 'GET',
                 headers: {
@@ -21,8 +23,29 @@ export const MovieProvider = ({children}) => {
             let response = await request
             if(response.ok){
                 let result = await response.json()
-                console.log(result.movies)
                 return result.movies
+            }
+            else{
+                let result = await response.json()
+                toaster.error(result.message)
+            }            
+        } catch (error) {
+            toaster.error(error.message)
+        }
+    }
+
+    let getMoviesByUrl = async (url) =>{
+        try {
+            let request = fetch(url,{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            let response = await request
+            if(response.ok){
+                let result = await response.json()
+                return result
             }
             else{
                 let result = await response.json()
@@ -36,22 +59,21 @@ export const MovieProvider = ({children}) => {
     
     let rateMovie = async (comment, rate, movieId) =>{
         try {
-            const localToken = JSON.parse(localStorage.getItem('authTokens'))
-            if(localToken){
-                var token = localToken['accessToken']
-                var user = jwt_decode(localToken['accessToken'])['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/name']
+            const usernameAndToken = getUsernameAndToken()
+
+            if(usernameAndToken){
                 let request = fetch('https://localhost:7208/api/Movies/rate',{
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                         'Accept': 'application/json',
-                        'Authorization': 'Bearer ' + token
+                        'Authorization': 'Bearer ' + usernameAndToken.token
                     },
                     body: JSON.stringify({
                         'comment' : comment,
                         'rate' : rate,
                         'movieId' : movieId,
-                        'username' : user
+                        'username' : usernameAndToken.username
                     })
                 })  
                 let response = await request
@@ -75,6 +97,7 @@ export const MovieProvider = ({children}) => {
     let contextData = {
         getRandomMovies:getRandomMovies,
         rateMovie:rateMovie,
+        getMoviesByUrl:getMoviesByUrl
     }
     
     return(

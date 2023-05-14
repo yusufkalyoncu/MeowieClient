@@ -8,13 +8,20 @@ const UrlService = {
             if(genres) {
             genres.map((genre)=>genresUrl+=`&Genres=${genre}`)
             }
-            console.log(`${baseURL}Movies?Page=${page}&Count=${count}${genresUrl}&Shuffle=${shuffle}`)
             return `${baseURL}Movies?Page=${page}&Count=${count}${genresUrl}`
         },
-        MovieById : (movieId) => `${baseURL}Movies/${movieId}`
+        MovieById : (movieId) => `${baseURL}Movies/${movieId}`,
+        SearchMovie : (count, page=0, shuffle=false, searchKeyword) => `${baseURL}Movies/search?Page=${page}&Count=${count}&Shuffle=${shuffle}&SearchKeyword=${searchKeyword}`
     },
     comment : {
         GetUserCommentByMovieId : (username, movieId) => `${baseURL}Comments/single-comment?Username=${username}&MovieId=${movieId}`
+    },
+    image : {
+        GetProfileImage : (imagename) => `${baseURL}Images/${imagename}`
+    },
+    movieList : {
+        GetAllUserMovieList : (username) => `${baseURL}MovieLists/user-movielist?Username=${username}`,
+        AddMovieToList : (movieId, movieListId) => `${baseURL}MovieLists/add-movie?MovieId=${movieId}&MovieListId=${movieListId}`
     }
 }
 

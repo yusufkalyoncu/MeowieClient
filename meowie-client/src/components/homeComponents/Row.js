@@ -15,11 +15,12 @@ const Row = ({title, fetchURL, rowId, count}) => {
 
   return (
     <>
-    <div className='w-full h-auto justify-center text-center pt-6 pb-4'>
-        <h2 className='text-white font-bold md:text-xl pb-3'>{title}</h2>
+    <div className='flex justify-center items-center w-full pb-6'>
+    <div className='flex flex-col items-center h-full w-[90%] sm:w-[80%] md:w-[70%] lg:w-[60%] xl:w-[50%]'>
+        <h2 className='text-white font-bold md:text-xl'>{title}</h2>
         <div className='relative flex items-center group'>
-          <div id={'slider'+rowId} className='w-full h-full overflow-x-scroll whitespace-nowrap scroll-smooth scrollbar-hide'>
-            {
+          <div id={'slider'+rowId} className='mt-2 grid grid-cols-5 gap-2'>
+          {
               movies.length > 0
               ?
               movies.map((item, id)=>(<RowMovie key={id} item={item}/>))
@@ -30,6 +31,7 @@ const Row = ({title, fetchURL, rowId, count}) => {
             }
           </div>
         </div>
+    </div>
     </div>
     </>
   )

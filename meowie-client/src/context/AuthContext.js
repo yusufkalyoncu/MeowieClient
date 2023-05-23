@@ -38,7 +38,7 @@ export const AuthProvider = ({children}) =>{
             }
             else{
                 let result = await response.json()
-                toaster.error(result.message)
+                return result.message
             }         
         } catch (error) {
             toaster.error(error.message)

@@ -15,6 +15,7 @@ import ScrollToTop from "./utils/ScrollToTop"
 import 'font-awesome/css/font-awesome.min.css';
 import Profile from "./pages/Profile";
 import { MovieListProvider } from "./context/MovieListContext";
+import MovieListDetail from "./components/movieListDetailComponents/MovieListDetail";
 function App() {
   return (
     <div>
@@ -34,6 +35,7 @@ function App() {
             <Route path="/register" element={<Register/>}/>
             <Route path="/profile" element={<Profile/>}/>
             <Route path="/detail/:id" element={<MovieDetail/>}/>
+            <Route path="/list-detail/:id" element={<MovieListDetail/>}/>
           </Routes>
         </SkeletonTheme>
       </MovieListProvider>

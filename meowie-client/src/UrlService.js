@@ -21,7 +21,8 @@ const UrlService = {
     },
     movieList : {
         GetAllUserMovieList : (username) => `${baseURL}MovieLists/user-movielist?Username=${username}`,
-        AddMovieToList : (movieId, movieListId) => `${baseURL}MovieLists/add-movie?MovieId=${movieId}&MovieListId=${movieListId}`
+        AddMovieToList : (movieId, movieListId) => `${baseURL}MovieLists/add-movie?MovieId=${movieId}&MovieListId=${movieListId}`,
+        GetMovieListDetail : (movieListId) => `${baseURL}MovieLists/${movieListId}`
     }
 }
 

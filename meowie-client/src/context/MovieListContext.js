@@ -42,6 +42,28 @@ export const MovieListProvider = ({children}) => {
         }
     }
 
+    const getMovieListDetail = async (movieListId) =>{
+        try {
+            let request = fetch(UrlService.movieList.GetMovieListDetail(movieListId),{
+                method: 'GET',
+                headers: {
+                    'Content-Type': 'application/json'
+                }
+            })
+            let response = await request
+            if(response.ok){
+                let result = await response.json()
+                return result
+            }
+            else{
+                let result = await response.json()
+                toaster.error(result.message)
+            } 
+        } catch (error) {
+            toaster.error(error.message)
+        }
+    }
+
     const addMovieToList = async (movieId, movieListId) =>{
         try {
             const usernameAndToken = getUsernameAndToken()
@@ -80,7 +102,8 @@ export const MovieListProvider = ({children}) => {
 
     let contextData = {
         getUserMovieLists:getUserMovieLists,
-        addMovieToList:addMovieToList
+        addMovieToList:addMovieToList,
+        getMovieListDetail:getMovieListDetail
     }
     
     return(

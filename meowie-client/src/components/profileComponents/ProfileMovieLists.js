@@ -9,7 +9,6 @@ const ProfileMovieLists = ({username}) => {
 
   useEffect(() => {
     getUserMovieLists(username).then(lists => {
-      console.log(lists)
       setMovieLists(lists);
     })
   }, [username])

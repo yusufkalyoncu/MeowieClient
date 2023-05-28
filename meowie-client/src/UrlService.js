@@ -20,9 +20,16 @@ const UrlService = {
         GetProfileImage : (imagename) => `${baseURL}Images/${imagename}`
     },
     movieList : {
-        GetAllUserMovieList : (username) => `${baseURL}MovieLists/user-movielist?Username=${username}`,
+        GetAllUserMovieList : (ownerUser, likerUser) =>{
+            if(likerUser){
+                return `${baseURL}MovieLists/user-movielist?ListOwnerUsername=${ownerUser}&LoggedUsername=${likerUser}`
+            }
+            return `${baseURL}MovieLists/user-movielist?ListOwnerUsername=${ownerUser}`
+        },
         AddMovieToList : (movieId, movieListId) => `${baseURL}MovieLists/add-movie?MovieId=${movieId}&MovieListId=${movieListId}`,
-        GetMovieListDetail : (movieListId) => `${baseURL}MovieLists/${movieListId}`
+        GetMovieListDetail : (movieListId) => `${baseURL}MovieLists/${movieListId}`,
+        LikeMovieList : (movieListId, username) => `${baseURL}MovieLists/like?MovieListId=${movieListId}&Username=${username}`,
+        
     }
 }
 

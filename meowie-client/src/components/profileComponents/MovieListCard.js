@@ -1,7 +1,8 @@
 import React, { useState } from 'react'
 import { useNavigate } from "react-router-dom";
+import LikeMovieListIcon from '../common/LikeMovieListIcon';
 
-const MovieListCard = ({movieList}) => {
+const MovieListCard = ({movieList, callbackFunc}) => {
   const [isHovered, setIsHovered] = useState(false);
 
   const handleHover = () => {
@@ -9,25 +10,30 @@ const MovieListCard = ({movieList}) => {
   };
   const navigate = useNavigate()
   return (
-    <div className='w-48'>
+    <div className='w-48 h-24'>
       <div
-        className="bg-gray-700 shadow-md rounded-md relative w-full h-24 flex flex-col justify-center items-center cursor-pointer"
+        className="bg-gray-700 shadow-md rounded-md relative w-full h-full first-letter:flex flex-col justify-center items-center cursor-pointer"
         onMouseEnter={handleHover}
         onMouseLeave={handleHover}
-        onClick={()=>navigate(`/list-detail/${movieList?.id}`)}
       >
+        <div onClick={()=>navigate(`/list-detail/${movieList?.id}`)} className='w-full h-full'>
         <div className="text-white font-bold text-sm absolute top-2 left-2">
           {movieList.movieCount} movies
         </div>
         <div className="text-white font-bold text-sm absolute top-2 right-2">
           {movieList.likesCount} likes
         </div>
-        <div className={`card-bottom h-10 flex items-center justify-center transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
+        </div>
+        <div className={`absolute left-3 bottom-3 flex items-center justify-center transition-opacity duration-300 ${isHovered ? 'opacity-100' : 'opacity-0'}`}>
           <div className="text-white text-sm text-center">
             <div className="mb-1">View</div>
           </div>
         </div>
+        <span className='absolute bottom-3 right-3 z-10'>
+          <LikeMovieListIcon userIsLiked={movieList.isLiked} movieListId={movieList?.id} callbackFunc={callbackFunc}/>
+        </span>
       </div>
+      
       <div className="truncate text-center">{movieList.title}</div>
     </div>
   );
